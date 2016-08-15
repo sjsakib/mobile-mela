@@ -1,0 +1,188 @@
+/*font*/
+body {
+    font-family: cursive;
+}
+
+/*containers */
+.index-con {
+    width: 800px;
+    margin: 0 auto;
+    padding: 0 40px 40px 40px;
+}
+.add-con {
+    width: 400px;
+}
+.edit-con {
+    width: 850px;
+}
+.rexp-con {
+    width: 400px;
+}
+.sell-con {
+    width: 550px;
+}
+.sell-con,.rexp-con,.add-con,.edit-con,.due-con {
+    padding: 40px;
+    margin: auto;
+
+}
+.sell-con,.rexp-con,.index-con,.add-con,.edit-con,.due-con {
+    background-color: #4a7545;
+    overflow: auto;
+    align: center;
+    border-radius: 30px;
+}
+
+.due-con {
+    width: 800px;
+}
+.add-due-con {
+    width: 400px;
+    align: center;
+    margin: auto;
+}
+
+
+/*home page*/
+#incomebox, #outcomebox {
+    margin: 0 auto;
+}
+#incomebox {
+    float: left;
+    width: 500px;
+}
+#outcomebox {
+    float: left;
+    width: 300px;
+}
+#cashbox {
+    float :left;
+    width: 300px;
+}
+#duebox {
+    float :left;
+    width: 500px;
+}
+
+.clock {
+    margin: 20px;
+}
+
+/*the banner*/
+.banner {
+    text-align: center;
+}
+.banner h1 {
+    color: #333333
+}
+
+/*submit button cantainer*/
+.center-submit {
+    margin: 0 auto;
+    width: 125px;
+    padding: 10px;
+}
+
+/* styling with table dispay*/
+div.table {
+    display: table;
+}
+div.tr,form.tr {
+    display: table-row;
+    table-layout: fixed;
+}
+div.td {
+    display: table-cell;
+    padding: 10px;
+}
+
+/*flex styling */
+.htr{
+    display: flex;
+    flex-flow: row wrap;
+    padding: 10px;
+    margin: 0 20px;
+    border-radius: 15px;
+}
+div.index-con .htr:nth-child(odd) {
+    background-color: #691b1b;
+}
+div.index-con .htr:nth-child(even) {
+    background-color: #1e5a1c;
+}
+.htd3 {
+    width: 33%;
+}
+.htd4 {
+    width: 25%;
+}
+.htd2 {
+    width: 50%;
+}
+
+/*input field sizing*/
+.percent {
+    width: 65px;
+}
+.profit {
+    width: 70px;
+}
+.count {
+    width: 60px;
+}
+.price {
+    width: 80px;
+}
+.rm-due-amount {
+    width: 80px;
+}
+
+
+/* nav bar*/
+ul.nav {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+    border-radius: 20px;
+}
+ul.nav li {
+    float: left;
+}
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+li a:hover:not(.active) {
+    background-color: #111;
+}
+
+/*input forms */
+input[type=text], input[type=number], select {
+    padding: 8px 10px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-sizing: border-box;
+}
+
+input[type=submit],input[type=reset],input[type=button],button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 7px 10px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+input[type=submit]:hover,input[type=reset]:hover,input[type=button],button:hover {
+    background-color: #45a049;
+}
+
+:disabled {
+    cursor: not-allowed;
+}

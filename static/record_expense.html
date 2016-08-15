@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Record Expense</title>
+    <link rel="stylesheet" type="text/css" href="styles/jquery-ui.min.css">
+    <link rel="stylesheet" type="text/css" href="styles/style.css">
+    <script src="scripts/jquery.min.js"></script>
+    <script src="scripts/jquery-ui.min.js"></script>
+    <script src="scripts/expense.js"></script>
+</head>
+
+<body>
+    <div id="expense-box" class="rexp-con">
+        <h4>Expense Details</h4>
+        <form name="expense-record" id="expense-record">
+        <div class="htr">
+            <div class="htd2">
+            <label for="details">Details</label>
+            </div>
+            <div class="htd2">
+            <input type="text" name="details" id="details" required="true">
+            </div>
+        </div>
+        <div class="htr">
+            <div class="htd2"><label for="type">Type</label></div>
+            <div class="htd2">
+            <input type="radio" name="type" value="minor" id="type1" checked>minor
+            <input type="radio" name="type" value="major" id="type2">major</br>
+            <input type="radio" name="type" value="withdraw" id="type3">withdraw
+            </div>
+        </div>
+        <div class="htr">
+            <div class="htd2"><label for="amount">Amount</label></div>
+            <div class="htd2"><input type="number" name="amount" id="amount" required="true"></div>
+        </div>
+        <div class="htr">
+            <div class="htd2">Date</div>
+            <div class="htd2"><span id="date"></span></div>
+        </div>
+         <div class="htr">
+            <div class="htd2">Time</div>
+            <div class="htd2"><span id="time"></span></div>
+        </div>
+        <div class="center-submit">
+            <input type="reset">
+            <input type="submit" name="submit" id="submit">
+        </div>
+        </form>
+    </div>
+</body>
+
+</html>

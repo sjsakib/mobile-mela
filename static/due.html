@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Due</title>
+    <link rel="stylesheet" type="text/css" href="styles/jquery-ui.min.css">
+    <link rel="stylesheet" type="text/css" href="styles/style.css">
+    <script src="scripts/jquery.min.js"></script>
+    <script src="scripts/jquery-ui.min.js"></script>
+    <script src="scripts/due.js"></script>
+</head>
+
+<body>
+    <div class="due-con">
+        <div class="add-due-con" id="add-due-con">
+        <h4>Add due</h4>
+        <form name="addDue" id="addDue">
+        <div class="htr">
+            <div class="htd2">
+            <label for="details">Details</label>
+            </div>
+            <div class="htd2">
+            <input type="text" name="details" id="details" required="true">
+            </div>
+        </div>
+        <div class="htr">
+            <div class="htd2"><label for="amount">Amount</label></div>
+            <div class="htd2"><input type="number" name="amount" id="amount" required="true"></div>
+        </div>
+        <div class="htr">
+            <div class="htd2">Date</div>
+            <div class="htd2"><span id="date"></span></div>
+        </div>
+         <div class="htr">
+            <div class="htd2">Time</div>
+            <div class="htd2"><span id="time"></span></div>
+        </div>
+        <div class="center-submit">
+            <input type="reset">
+            <input type="submit" name="submit" id="submit">
+        </div>
+        </form>
+        </div>
+
+        <div class="remove-due" id="reomoveDue">
+            <h4>Remove Due</h4>
+            <div id="allitems" class="table">
+            <div class="tr">
+                <div class="td">Date</div>
+                <div class="td">Details</div>
+                <div class="td">Amount</div>
+                <div class="td">Remove</div>
+                <div class="td">Save</div>
+            </div>
+        </div>
+    </div>
+    </div>
+</body> 

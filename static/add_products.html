@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Add Products</title>
+    <link rel="stylesheet" type="text/css" href="styles/jquery-ui.min.css">
+    <link rel="stylesheet" type="text/css" href="styles/style.css">
+    <script src="scripts/jquery.min.js"></script>
+    <script src="scripts/jquery-ui.min.js"></script>
+    <script src="scripts/add_product.js"></script>
+</head>
+
+<body>
+    <div id="formbox" class="add-con">
+        <h4>Enter product details</h4>
+        <form name="product" id="product">
+            <div class="htr">
+                <div class="htd2"><label for="brand">Brand</label></div>
+                <div class="htd2"><input type="text" id="brand" name="brand" required="true"></div>
+            </div>
+            <div class="htr">
+                <div class="htd2"><label for="model">Model</label></div>
+                <div class="htd2"><input type="text" id="model" name="model" required="true"></div>
+            </div>
+            <div class="htr">
+                <div class="htd2"><label for="type">Type</label></div>
+                <div class="htd2"><input type="text" id="type" name="type" required="true"></div>
+            </div>
+            <div class="htr">
+                <div class="htd2"><label for="buyingprice">Buying price</label></div>
+                <div class="htd2"><input type="number" step="10" id="buyingprice" name="buyingprice" required="true"></div>
+            </div>
+            <div class="htr">
+                <div class="htd2"><label for="count">Number of products</label></div>
+                <div class="htd2"><input type="number" id="count" name="count" required="true"></div>
+            </div>
+            <div class="htr"><input type="checkbox" name="checkbox" value="toReset">Reset form with submission</div>
+            <div class="htr"><input type="checkbox" name="cashcheckbox" value="toMinus">From cash</div>
+            <div class="htr">
+                <div class="htd2"><input type = "reset" id ="resetButton" name ="resetButton" value="Reset"></div>
+                <div class="htd2"><input type="submit" name="submit" id="submit"></div>
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>
