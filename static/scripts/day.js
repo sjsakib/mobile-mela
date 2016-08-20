@@ -12,7 +12,6 @@ $(document).ready(function() {
                 "t1" : t1,
                 "t2" : t2
             };
-            console.log(data);
             $.post(api_url+"getSales",data,function(data,status) {
                 $("#incomeData").html(data);
             });
@@ -24,6 +23,9 @@ $(document).ready(function() {
             });
             $.post(api_url+"getCash",data,function(data,status) {
                 $("#cashData").html(data);
+            }).fail(function() {
+                $("#cashData").html("");
+                alert("No record found!")
             });
         } 
     });

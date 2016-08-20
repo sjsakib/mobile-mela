@@ -2,6 +2,10 @@
 body {
     font-family: cursive;
 }
+a {
+    text-decoration: none;
+    color: #241258;
+}
 
 /*containers */
 .index-con {
@@ -31,6 +35,7 @@ body {
     overflow: auto;
     align: center;
     border-radius: 30px;
+    box-shadow: 8px 8px 50px black;
 }
 
 .due-con {
@@ -44,36 +49,76 @@ body {
 
 
 /*home page*/
-#incomebox, #outcomebox {
+#col1 {
+    width: 500px;
+    overflow: auto;
+    margin: 0;
+    float: right;
+}
+#col2 {
+    float: right;
+    width: 300px;
+}
+#col1,#col2 {
+
+}
+#incomebox, #outcomebox,#cashbox,#itemsbox,#duebox {
     margin: 0 auto;
+    float: left;
 }
 #incomebox {
-    float: left;
     width: 500px;
 }
 #outcomebox {
-    float: left;
     width: 300px;
 }
 #cashbox {
-    float :left;
     width: 300px;
 }
 #duebox {
-    float :left;
     width: 500px;
+}
+#itemsbox {
+    width: 400px;
 }
 
 .clock {
     margin: 20px;
 }
 
+/*stat page*/
+#statsbox {
+    margin: 0 auto;
+    width: 500px;
+}
+.graph {
+    margin: 0 auto 100px auto;
+    width: 800px;
+    height: 300px;
+}
+.graph2 {
+    float: left;
+    margin: auto;
+    width: 400px;
+    height: 300px;
+}
+
 /*the banner*/
 .banner {
     text-align: center;
+    margin: auto;
+    width: 715px
 }
 .banner h1 {
     color: #333333
+}
+
+/*footer*/
+.footer {
+    width: 600px;
+    align: center;
+    margin: auto;
+    text-align: center;
 }
 
 /*submit button cantainer*/
@@ -109,6 +154,9 @@ div.index-con .htr:nth-child(odd) {
 }
 div.index-con .htr:nth-child(even) {
     background-color: #1e5a1c;
+}
+.htd34 {
+    width: 75%;
 }
 .htd3 {
     width: 33%;
@@ -146,6 +194,7 @@ ul.nav {
     overflow: hidden;
     background-color: #333;
     border-radius: 20px;
+    align-items: center;
 }
 ul.nav li {
     float: left;

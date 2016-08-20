@@ -2,6 +2,23 @@ import json
 from variables import *
 from datetime import datetime
 
+def get_items(con):
+    ret = "<h5>Smart:</h5>"
+    cur = con.execute("""select brand,sum(count) as cc from items where type="Smartphone" group by brand order by cc desc""")
+    res = cur.fetchall()
+    for row in res:
+        if(row[1]):
+            ret+=smarttem.format(row[0],row[1])
+
+    ret+="<h5>Feature:<h5>"
+    cur = con.execute("""select brand,sum(count) as cc from items where type="Feature Phone" group by brand order by cc desc""")
+    res = cur.fetchall()
+    for row in res:
+        if(row[1]):
+            ret+=featuretem.format(row[0],row[1])
+    return ret
+
+
 def add_to_cash(x,con):
     cur = con.execute("""select max(id) from cash""");
     res = cur.fetchone()
@@ -16,10 +33,11 @@ def add_item(data,con):
     count = int(data['count'])
     date = int(data['dt'])
     fromcash = bool(data['fromcash'])
+    print fromcash
 
     if(fromcash):
         add_to_cash(count*buyingprice*-1,con)
-        con.execute("""insert into exp values(null,{},"major","Buying {} {} {}",{})""".format(date,count,brand,model,count*buyingprice))
+        con.execute("""insert into exp values(null,{},"buying","Buying {} {} {}",{})""".format(date,count,brand,model,count*buyingprice))
 
     cur = con.cursor()
     cur.execute("""select id from items where brand='{}' and model='{}'""".format(brand,model))
@@ -30,6 +48,26 @@ def add_item(data,con):
         print res
         id = res[0][0];
         cur.execute("""update items set count=count+{} where id={}""".format(count,id))
+    con.commit()
+
+def update_item(data,con):
+    id = data['id']
+    brand = data['brand']
+    model = data['model']
+    type = data['type']
+    buyingprice = int(data['buyingprice'])
+    count = int(data['count'])
+
+    cur = con.execute("""select buyingprice,count,brand,model from items where id={}""".format(id))
+    res = cur.fetchone()
+    bpr = res[0]
+    c = res[1]
+    br = res[2]
+    mo = res[3]
+    add_to_cash((bpr*c)-(buyingprice*count),con)
+    sql = """update exp set amount={}, details="Buying {} {} {}" where details="Buying {} {} {}" """.format(buyingprice*count,count,brand,model,c,br,mo)
+    con.execute(sql)
+    con.execute("""update items set brand="{}", model="{}", type="{}", buyingprice={}, count={} where id={}""".format(brand,model,type,buyingprice,count,id))
     con.commit()
 
 def get_brands(con):
@@ -59,16 +97,52 @@ def get_all_items(con):
         ret = ret+allitemstem.format(row[0],row[0],row[2],row[1],row[3],row[4],row[5]);
     return ret;
 
+def get_sales_form(data,con):
+    t1 = int(data['t1'])
+    t2 = int(data['t2'])
+    cur = con.execute("select sales.id,sales.dt,items.brand,items.model,items.buyingprice+sales.profit from items inner join sales on sales.item_id=items.id where sales.dt>={} and sales.dt<={}".format(t1,t2))
+    data = cur.fetchall()
 
-def update_item(data,con):
+    ret = ""
+    for row in data:
+        time = datetime.fromtimestamp(int(row[1])).strftime("%I:%M")
+        ret = ret+salesitemstem.format(row[0],row[0],time,row[2],row[3],row[4]);
+    return ret;
+
+def update_sales(data,con):
     id = data['id']
-    brand = data['brand']
-    model = data['model']
-    type = data['type']
-    buyingprice = int(data['buyingprice'])
-    count = int(data['count'])
-    con.execute("""update items set brand="{}", model="{}", type="{}", buyingprice={}, count={} where id={}""".format(brand,model,type,buyingprice,count,id))
+    pr = int(data['price'])
+    cur = con.execute("""select buyingprice,profit from items inner join sales on sales.item_id=items.id where sales.id={}""".format(id))
+    res = cur.fetchone()
+    buyingprice = int(res[0])
+    profit = int(res[1])
+    nPro = pr - buyingprice
+    con.execute("""update sales set profit={} where id={}""".format(nPro,id))
+    add_to_cash(nPro-profit,con)
     con.commit()
+
+def get_exp_form(data,con):
+    t1 = int(data['t1'])
+    t2 = int(data['t2'])
+    cur = con.execute("select * from exp where dt>={} and dt<={}".format(t1,t2))
+    data = cur.fetchall()
+
+    ret = ""
+    for row in data:
+        ret = ret+expitemstem.format(row[0],row[0],row[3],row[2],row[4]);
+    return ret;
+
+def update_exp(data,con):
+    id = data['id']
+    cur = con.execute("""select amount from exp where id={}""".format(id))
+    am = int(cur.fetchone()[0])
+    amount = int(data['amount'])
+    type = data['type']
+    details = data['details']
+    add_to_cash(am-amount)
+    con.execute("""update exp set amount={},type='{}',details='{}' where id={}""".format(amount,type,details,id))
+    con.commit()
+
 
 def record_sell(data,con):
     brand = data['brand']
@@ -80,9 +154,9 @@ def record_sell(data,con):
     cur = con.execute("""select id,buyingprice from items where brand='{}' and model='{}' """.format(brand,model))
     res = cur.fetchall()
     item_id = res[0][0]
-    sellingprice = res[0][1]
+    sellingprice = res[0][1]+profit
 
-    add_to_cash(buyingprice+profit,con)
+    add_to_cash(sellingprice,con)
 
     sql = """insert into sales values(null,{},{},{},"{}")""".format(dt,item_id,profit,seller)
     con.execute(sql)
@@ -205,7 +279,7 @@ def get_cash(data,con):
         for row in res:
             totin+=row[0]
 
-    cur = con.execute("""select amount from due where dt1>={} and dt1<={} and dt2 is null""".format(t1,t2))
+    cur = con.execute("""select amount from due where dt1>={} and dt1<={}""".format(t1,t2))
     res = cur.fetchall()
     if res:
         for row in res:

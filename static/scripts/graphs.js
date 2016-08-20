@@ -32,12 +32,15 @@ function update() {
             chart.render();
             var chart = new CanvasJS.Chart("byBrand",{
                 animationEnabled: true,
+                theme: "theme2",
                 title:{
                     text: "Profit By Brand"
                 },
                 data: [
                     {
                         type: "pie",
+                        toolTipContent: "{y} - #percent %",
+                        yValueFormatString: "Tk #",
                         dataPoints: data.byBrand
                     }
                 ]
@@ -45,12 +48,15 @@ function update() {
             chart.render();
             var chart = new CanvasJS.Chart("byType",{
                 animationEnabled: true,
+                theme: "theme2",
                 title:{
                     text: "Profit By Type"
                 },
                 data: [
                     {
                         type: "pie",
+                        toolTipContent: "{y} - #percent %",
+                        yValueFormatString: "Tk #",
                         dataPoints: data.byType
                     }
                 ]

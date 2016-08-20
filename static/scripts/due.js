@@ -54,7 +54,7 @@ $(document).ready(function () {
                     "amount":fr.amount.value,
                     "date": Math.floor(new Date().getTime()/1000)
                 });
-                location.reload();
+                //location.reload();
             }
         });
 

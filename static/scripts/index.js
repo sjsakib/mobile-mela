@@ -2,6 +2,15 @@ var api_url = "http://localhost:8080/";
 
 jQuery.ajaxSetup({async:false});
 
+function init_cash(amount) {
+    var today = new Date(new Date().toDateString());
+    var data = {
+        "dt" : Math.floor(today.getTime()/1000),
+        "amount": amount
+    }
+    $.post(api_url+"initCash",data);
+}
+
 $(document).ready(function() {
     setInterval(function() {
         var d = new Date();
@@ -23,7 +32,6 @@ $(document).ready(function() {
         "t1" : t1,
         "t2" : t2
     };
-    console.log(data);
     $.post(api_url+"getSales",data,function(data,status) {
         $("#incomebox").append(data);
     });
@@ -35,5 +43,8 @@ $(document).ready(function() {
     });
     $.post(api_url+"getCash",data,function(data,status) {
         $("#cashbox").append(data);
+    });
+    $.post(api_url+"getItems",data,function(data,status) {
+        $("#itemsbox").append(data);
     });
 });

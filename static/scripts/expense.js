@@ -2,6 +2,7 @@ var api_url = "http://localhost:8080/";
 jQuery.ajaxSetup({async:false});
 
 
+
 $(document).ready(function () {
     var d = new Date();
     $("#date").html(d.toDateString());

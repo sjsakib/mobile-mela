@@ -6,9 +6,8 @@ var models = [];
 
 var types = [
     "Smartphone",
-    "Freature Phone",
-    "Accessory",
-    "Sim",
+    "Feature Phone",
+    "Accessory"
 ];
 
 $(document).ready(function () {
@@ -24,7 +23,7 @@ $(document).ready(function () {
         if($("#cashcheckbox").is(":checked")) {
             fromcash = "True";
         } else {
-            fromcash = "False";
+            fromcash = "";
         }
         var data = {
             "brand": brandval,
@@ -35,7 +34,6 @@ $(document).ready(function () {
             "fromcash": fromcash,
             "dt": Math.floor(new Date().getTime()/1000)
         };
-        console.log(data);
         $.post("http://localhost:8080/addItem",data,function(resp,status,xhr) {
             if(status != "success" || resp != "OK") {
                 $("#formbox").after("<p class='error'>Not added try Again</p>");

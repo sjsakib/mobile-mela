@@ -14,7 +14,16 @@ function update() {
         data = JSON.parse(data);
         var data2 = [];
         for (d in data) {
-            data2.push({ x: new Date(data[d].dt*1000), y:data[d].sales });
+            if(data[d].open) {
+                data2.push({ x: new Date(data[d].dt*1000), y:data[d].sales });
+            } else {
+                data2.push({
+                    x: new Date(data[d].dt*1000), y:data[d].sales,
+                    markerType: "circle",
+                    markerColor: "yellow",
+                    markerSize: 8
+                });
+            }
         }
         var chart = new CanvasJS.Chart("salesGraph",{
             animationEnabled: true,
@@ -23,12 +32,13 @@ function update() {
                 interval: 1,
                 intervalType: "day"
             },
+            theme:"theme3",
             title:{
                 text: "Sales History"
             },
             data: [
                 {
-                    type: "spline",
+                    type: "line",
                     lineThickness: 3,
                     dataPoints: data2
                 }

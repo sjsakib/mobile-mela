@@ -38,8 +38,3 @@ CREATE TABLE due (
     details TEXT,
     amount INTEGER
 );
-
-CREATE TABLE brands (
-    id INTEGER PRIMARY KEY,
-    name TEXT
-);
