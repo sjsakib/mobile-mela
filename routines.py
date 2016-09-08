@@ -94,7 +94,8 @@ def get_all_items(con):
 
     ret = ""
     for row in data:
-        ret = ret+allitemstem.format(row[0],row[0],row[2],row[1],row[3],row[4],row[5]);
+        if(row[5]):
+            ret = ret+allitemstem.format(row[0],row[0],row[2],row[1],row[3],row[4],row[5]);
     return ret;
 
 def get_sales_form(data,con):
