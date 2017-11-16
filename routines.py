@@ -152,7 +152,7 @@ def record_sell(data,con):
     seller = data['seller']
     dt = int(data['dt'])
 
-    cur = con.execute("""select id,buyingprice from items where brand='{}' and model='{}' """.format(brand,model))
+    cur = con.execute("""select id,buyingprice,count from items where brand='{}' and model='{}' """.format(brand,model))
     res = cur.fetchall()
     item_id = res[0][0]
     sellingprice = res[0][1]+profit
@@ -161,6 +161,8 @@ def record_sell(data,con):
 
     sql = """insert into sales values(null,{},{},{},"{}")""".format(dt,item_id,profit,seller)
     con.execute(sql)
+    cur = con.execute("""update items set count=count-1 where brand='{}' and model='{}' """.format(brand,model))
+    if(res[0][2] == 1): con.execute("""delete from items where brand='{}' and model='{}' """.format(brand,model))
     con.commit()
 
 def record_expense(data,con):
